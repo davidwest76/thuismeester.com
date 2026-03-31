@@ -79,15 +79,18 @@ export default function HomePage() {
           ===================================================== */}
       <section className="relative flex min-h-[90vh] items-end bg-green">
         {/* Background photo */}
-        <Image
-          src="https://images.unsplash.com/photo-1560518883-ce09059eeffa?w=1800&q=80"
-          alt="Een nette Nederlandse gezinswoning in Amersfoort en omstreken"
-          fill
-          priority
-          className="object-cover object-center"
-          sizes="100vw"
+    <Image
+  src="/images/jaren-30-woning.jpg"
+  alt="Een nette Nederlandse gezinswoning in Amersfoort en omstreken"
+  fill
+  priority
+  className="object-cover object-[center_30%]"
+  sizes="100vw"
+/>    
+ 
+
           // TODO: replace src with /images/hero-home.jpg (final photography)
-        />
+        
         {/* Gradient overlay — darkens bottom for text legibility */}
         <div className="absolute inset-0 bg-gradient-to-t from-green/90 via-green/40 to-transparent" />
 
