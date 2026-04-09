@@ -89,8 +89,6 @@ export default function HomePage() {
 />    
  
 
-          // TODO: replace src with /images/hero-home.jpg (final photography)
-        
         {/* Gradient overlay — darkens bottom for text legibility */}
         <div className="absolute inset-0 bg-gradient-to-t from-green/90 via-green/40 to-transparent" />
 
@@ -194,7 +192,6 @@ export default function HomePage() {
 
             {/* Image block */}
             <div className="relative aspect-[4/3] overflow-hidden rounded-sm shadow-sm lg:aspect-square">
-              {/* TODO: replace src with /images/homeowner-busy.jpg */}
               <Image
                 src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=80"
                 alt="Drukke huiseigenaar met weinig tijd voor woningbeheer"
@@ -219,7 +216,6 @@ export default function HomePage() {
           <div className="grid items-center gap-16 lg:grid-cols-2">
             {/* Image block — left on desktop */}
             <div className="relative aspect-[4/3] overflow-hidden rounded-sm shadow-lg order-last lg:order-first">
-              {/* TODO: replace src with /images/service-homeowner.jpg */}
               <Image
                 src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80"
                 alt="Thuismeester in gesprek met een bewoner — betrouwbaar en persoonlijk"
@@ -400,7 +396,6 @@ export default function HomePage() {
           fill
           className="object-cover object-center"
           sizes="100vw"
-          // TODO: replace src with /images/launch-amersfoort.jpg
         />
         <div className="absolute inset-0 bg-green/85" />
 

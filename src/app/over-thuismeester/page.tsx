@@ -50,7 +50,6 @@ export default function OverThuismeesterPage() {
           priority
           className="object-cover object-center opacity-20"
           sizes="100vw"
-          // TODO: replace src with /images/over-header.jpg
         />
         <div className="section-wrapper relative z-10">
           <SectionLabel>
@@ -102,7 +101,6 @@ export default function OverThuismeesterPage() {
 
             {/* Image */}
             <div className="relative aspect-[4/3] overflow-hidden shadow-sm">
-              {/* TODO: replace src with /images/about-story.jpg */}
               <Image
                 src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=80"
                 alt="Thuismeester — rust en overzicht in huis"
@@ -149,7 +147,6 @@ export default function OverThuismeesterPage() {
         <div className="section-wrapper">
           <div className="grid gap-6 sm:grid-cols-2">
             <div className="relative aspect-square overflow-hidden">
-              {/* TODO: replace src with /images/about-home-1.jpg */}
               <Image
                 src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?w=900&q=80"
                 alt="Nette voordeur van een gewone Nederlandse woning"
@@ -159,7 +156,6 @@ export default function OverThuismeesterPage() {
               />
             </div>
             <div className="relative aspect-square overflow-hidden">
-              {/* TODO: replace src with /images/about-home-2.jpg */}
               <Image
                 src="https://images.unsplash.com/photo-1583847268964-b28dc8f51f92?w=900&q=80"
                 alt="Rustige, nette woonruimte met warme sfeer"
@@ -219,8 +215,6 @@ export default function OverThuismeesterPage() {
               wie meer wil weten of de informatie wil delen met anderen. Houd
               deze pagina in de gaten of meld je aan voor updates.
             </p>
-            {/* TODO: Add PDF download link here once brochure is ready
-                Example: <a href="/downloads/thuismeester-brochure.pdf">Download brochure</a> */}
             <div className="mt-6">
               <Button href="/aanmelden" variant="outline">
                 Aanmelden voor updates

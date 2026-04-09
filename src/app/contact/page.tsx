@@ -9,12 +9,6 @@ export const metadata: Metadata = {
     "Neem contact op met Thuismeester. Actief in voorbereiding voor Amersfoort en omstreken.",
 };
 
-// -------------------------------------------------------
-// Contact details — edit before launch
-// -------------------------------------------------------
-const CONTACT_EMAIL = "info@thuismeester.nl"; // TODO: replace with real address
-const CONTACT_PHONE = "+31 6 00 00 00 00";    // TODO: replace with real number
-
 export default function ContactPage() {
   return (
     <>
@@ -59,7 +53,6 @@ export default function ContactPage() {
                   Replace with a warm, professional image — welcoming
                   front door, tidy hallway or calm living space. */}
               <div className="relative aspect-[4/3] overflow-hidden">
-                {/* TODO: replace src with /images/contact-trust.jpg */}
                 <Image
                   src="https://images.unsplash.com/photo-1560185007-cde436f6a4d0?w=700&q=80"
                   alt="Thuismeester — betrouwbaar aanspreekpunt in Amersfoort"
@@ -71,32 +64,6 @@ export default function ContactPage() {
 
               {/* Contact details */}
               <div className="space-y-5">
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-widest text-ink-muted">
-                    E-mail
-                  </p>
-                  {/* TODO: update with real email address */}
-                  <a
-                    href={`mailto:${CONTACT_EMAIL}`}
-                    className="mt-1 block text-sm text-green transition-colors hover:text-green-light"
-                  >
-                    {CONTACT_EMAIL}
-                  </a>
-                </div>
-
-                <div>
-                  <p className="text-xs font-semibold uppercase tracking-widest text-ink-muted">
-                    Telefoon
-                  </p>
-                  {/* TODO: update with real phone number */}
-                  <a
-                    href={`tel:${CONTACT_PHONE.replace(/\s/g, "")}`}
-                    className="mt-1 block text-sm text-green transition-colors hover:text-green-light"
-                  >
-                    {CONTACT_PHONE}
-                  </a>
-                </div>
-
                 <div>
                   <p className="text-xs font-semibold uppercase tracking-widest text-ink-muted">
                     Regio

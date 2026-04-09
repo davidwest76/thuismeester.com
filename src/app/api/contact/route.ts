@@ -3,18 +3,6 @@ import { writeFile, mkdir } from "fs/promises";
 import path from "path";
 import { existsSync } from "fs";
 
-// -------------------------------------------------------
-// Contact form API endpoint
-//
-// Current implementation:
-//   Saves messages to /data/contactberichten.json on the
-//   local filesystem.
-//
-// TODO for production:
-//   Replace with email notification (Resend, Nodemailer)
-//   or a helpdesk integration (Freshdesk, Intercom, etc.)
-// -------------------------------------------------------
-
 const DATA_DIR  = path.join(process.cwd(), "data");
 const DATA_FILE = path.join(DATA_DIR, "contactberichten.json");
 

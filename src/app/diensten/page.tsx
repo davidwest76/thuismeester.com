@@ -73,7 +73,6 @@ export default function DienstenPage() {
           priority
           className="object-cover object-center opacity-20"
           sizes="100vw"
-          // TODO: replace src with /images/diensten-header.jpg
         />
         <div className="section-wrapper relative z-10">
           <SectionLabel>
@@ -140,7 +139,6 @@ export default function DienstenPage() {
         <div className="section-wrapper">
           <div className="grid items-center gap-12 lg:grid-cols-2">
             <div className="relative aspect-[4/3] overflow-hidden">
-              {/* TODO: replace src with /images/contact-trust.jpg */}
               <Image
                 src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=900&q=80"
                 alt="Betrouwbaar en persoonlijk contact met jouw Thuismeester"

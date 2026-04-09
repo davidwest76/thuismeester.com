@@ -1,11 +1,6 @@
 import Link from "next/link";
 
-// -------------------------------------------------------
-// Edit contact details below before launch
-// -------------------------------------------------------
-const CONTACT_EMAIL  = "info@thuismeester.nl";   // TODO: replace with real address
-const CONTACT_PHONE  = "+31 6 00 00 00 00";       // TODO: replace with real number
-const REGION_NOTE    = "Amersfoort en omstreken";
+const REGION_NOTE = "Amersfoort en omstreken";
 
 const footerLinks = [
   { label: "Hoe werkt het",     href: "/hoe-werkt-het" },
@@ -63,29 +58,8 @@ export default function Footer() {
             <p className="mb-4 text-xs font-semibold uppercase tracking-widest text-white/50">
               Contact
             </p>
-            <ul className="space-y-2.5 text-sm text-white/80">
-              <li>
-                {/* TODO: replace with real e-mail address */}
-                <a
-                  href={`mailto:${CONTACT_EMAIL}`}
-                  className="transition-colors hover:text-white"
-                >
-                  {CONTACT_EMAIL}
-                </a>
-              </li>
-              <li>
-                {/* TODO: replace with real phone number */}
-                <a
-                  href={`tel:${CONTACT_PHONE.replace(/\s/g, "")}`}
-                  className="transition-colors hover:text-white"
-                >
-                  {CONTACT_PHONE}
-                </a>
-              </li>
-            </ul>
-
             {/* Pre-launch note */}
-            <div className="mt-8 rounded-sm border border-white/20 p-4">
+            <div className="rounded-sm border border-white/20 p-4">
               <p className="text-xs leading-relaxed text-white/60">
                 Thuismeester start in januari 2027 bij voldoende aanmeldingen
                 in {REGION_NOTE}.

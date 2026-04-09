@@ -107,7 +107,6 @@ export default function HoeWerktHetPage() {
 
                 {/* Image */}
                 <div className="relative aspect-[4/3] overflow-hidden shadow-sm">
-                  {/* TODO: replace src with step-specific image (see comments above) */}
                   <Image
                     src={step.image}
                     alt={step.imageAlt}
