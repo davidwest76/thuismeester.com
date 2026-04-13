@@ -13,7 +13,7 @@ const steps = [
   {
     number: "01",
     title: "Schrijf je in",
-    body: "Meld je vrijblijvend aan via het aanmeldformulier. Je vult je naam, e-mail, telefoonnummer en postcode in. Er zijn geen kosten verbonden aan de aanmelding.",
+    body: "Meld je vrijblijvend aan via het aanmeldformulier. Je vult je naam, e-mailadres, postcode en woonplaats in. Er zijn geen kosten verbonden aan de aanmelding.",
     // Image: /images/step-aanmelden.jpg
     // Replace with a clean photo of someone filling in a form on a tablet or laptop
     image: "https://images.unsplash.com/photo-1484480974693-6ca0a78fb36b?w=900&q=80",

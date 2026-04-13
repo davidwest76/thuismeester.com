@@ -111,21 +111,6 @@ export default function AanmeldenForm() {
         />
       </div>
 
-      {/* Telefoonnummer */}
-      <div>
-        <label htmlFor="telefoon" className="form-label">
-          Telefoonnummer
-        </label>
-        <input
-          id="telefoon"
-          name="telefoon"
-          type="tel"
-          autoComplete="tel"
-          placeholder="06 00 000 000"
-          className="form-input"
-        />
-      </div>
-
       {/* Postcode + Woonplaats (two columns) */}
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
