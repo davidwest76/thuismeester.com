@@ -5,9 +5,6 @@ import Button from "./Button";
 
 type FormState = "idle" | "loading" | "success" | "error";
 
-// -------------------------------------------------------
-// Woonplaats options — edit to add/remove regions
-// -------------------------------------------------------
 const woonplaatsen = [
   "Amersfoort",
   "Leusden",
@@ -40,38 +37,26 @@ export default function AanmeldenForm() {
         setState("success");
       } else {
         const json = await res.json();
-        setErrorMessage(
-          json.message || "Er is iets misgegaan. Probeer het opnieuw."
-        );
+        setErrorMessage(json.message || "Er is iets misgegaan. Probeer het opnieuw.");
         setState("error");
       }
     } catch {
-      setErrorMessage(
-        "Er kon geen verbinding worden gemaakt. Controleer je internetverbinding."
-      );
+      setErrorMessage("Er kon geen verbinding worden gemaakt. Controleer je internetverbinding.");
       setState("error");
     }
   }
 
-  // -------------------------------------------------------
-  // Success state
-  // -------------------------------------------------------
   if (state === "success") {
     return (
       <div className="rounded-sm border border-green/30 bg-green/5 p-8 text-center">
-        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center
-                        rounded-full bg-green text-white text-xl">
+        <div className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-green text-white text-xl">
           ✓
         </div>
         <h3 className="font-serif text-xl font-semibold text-ink">
           Aanmelding ontvangen
         </h3>
-        {/* -------------------------------------------------------
-            Success message — edit this text if needed
-            ------------------------------------------------------- */}
         <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-          Dank voor je aanmelding. We houden je op de hoogte van de
-          ontwikkeling van Thuismeester in jouw regio.
+          Bedankt voor je aanmelding. We hebben je gegevens ontvangen en nemen binnenkort contact met je op.
         </p>
       </div>
     );
@@ -79,6 +64,9 @@ export default function AanmeldenForm() {
 
   return (
     <form onSubmit={handleSubmit} noValidate className="space-y-6">
+      {/* Honeypot — verborgen voor mensen, ingevuld door bots */}
+      <input type="text" name="_hp" tabIndex={-1} autoComplete="off" className="hidden" aria-hidden="true" />
+
       {/* Naam */}
       <div>
         <label htmlFor="naam" className="form-label">
@@ -111,7 +99,7 @@ export default function AanmeldenForm() {
         />
       </div>
 
-      {/* Postcode + Woonplaats (two columns) */}
+      {/* Postcode + Woonplaats */}
       <div className="grid gap-4 sm:grid-cols-2">
         <div>
           <label htmlFor="postcode" className="form-label">
@@ -140,13 +128,9 @@ export default function AanmeldenForm() {
             className="form-input bg-white"
             defaultValue=""
           >
-            <option value="" disabled>
-              Selecteer woonplaats
-            </option>
+            <option value="" disabled>Selecteer woonplaats</option>
             {woonplaatsen.map((w) => (
-              <option key={w} value={w}>
-                {w}
-              </option>
+              <option key={w} value={w}>{w}</option>
             ))}
           </select>
         </div>
@@ -169,7 +153,9 @@ export default function AanmeldenForm() {
 
       {/* Error */}
       {state === "error" && errorMessage && (
-        <p className="text-sm text-red-600">{errorMessage}</p>
+        <p className="rounded-sm bg-red-50 px-4 py-3 text-sm text-red-700">
+          {errorMessage}
+        </p>
       )}
 
       {/* Submit */}
