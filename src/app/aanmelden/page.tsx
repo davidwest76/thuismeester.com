@@ -66,7 +66,7 @@ export default function AanmeldenPage() {
                   welcoming entrance, or professional conversation. */}
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?w=700&q=80"
+                  src="/images/jaren-30-woning.jpg"
                   alt="Gewone gezinswoning in Amersfoort en omstreken"
                   fill
                   className="object-cover object-center"
