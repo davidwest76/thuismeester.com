@@ -1,16 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
-import { writeFile, mkdir, readFile } from "fs/promises";
-import path from "path";
-import { existsSync } from "fs";
-import { Resend } from "resend";
+import { createClient } from "@supabase/supabase-js";
 
-const DATA_DIR  = path.join(process.cwd(), "data");
-const DATA_FILE = path.join(DATA_DIR, "aanmeldingen.json");
+const supabase = createClient(
+  process.env.SUPABASE_URL!,
+  process.env.SUPABASE_ANON_KEY!
+);
 
 interface AanmeldingPayload {
   naam: string;
   email: string;
-  telefoon?: string;
   postcode: string;
   woonplaats: string;
   opmerkingen?: string;
@@ -36,7 +34,6 @@ function validatePayload(body: unknown): { valid: true; data: AanmeldingPayload 
     data: {
       naam:        (b.naam as string).trim(),
       email:       (b.email as string).toLowerCase().trim(),
-      telefoon:    b.telefoon ? (b.telefoon as string).trim() : undefined,
       postcode:    (b.postcode as string).toUpperCase().replace(/\s/g, " ").trim(),
       woonplaats:  (b.woonplaats as string).trim(),
       opmerkingen: b.opmerkingen ? (b.opmerkingen as string).trim() : undefined,
@@ -53,83 +50,26 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ message: result.message }, { status: 400 });
     }
 
-    const record = {
-      ...result.data,
-      timestamp: new Date().toISOString(),
-    };
+    const { error } = await supabase
+      .from("aanmeldingen")
+      .insert([result.data]);
 
-    // Opslaan als JSON-array
-    if (!existsSync(DATA_DIR)) await mkdir(DATA_DIR, { recursive: true });
-    let aanmeldingen: object[] = [];
-    if (existsSync(DATA_FILE)) {
-      try {
-        aanmeldingen = JSON.parse(await readFile(DATA_FILE, "utf-8"));
-      } catch {
-        aanmeldingen = [];
-      }
-    }
-    aanmeldingen.push(record);
-    await writeFile(DATA_FILE, JSON.stringify(aanmeldingen, null, 2), { encoding: "utf-8" });
-
-    // E-mails versturen via Resend
-    const apiKey  = process.env.RESEND_API_KEY;
-    const toEmail = process.env.DIGEST_TO_EMAIL;
-    const from    = process.env.DIGEST_FROM ?? "Thuismeester <noreply@thuismeester.nl>";
-
-    if (apiKey && toEmail) {
-      const resend = new Resend(apiKey);
-
-      // Melding naar eigenaar
-      await resend.emails.send({
-        from,
-        to: toEmail,
-        subject: `Nieuwe aanmelding — ${record.naam} (${record.woonplaats})`,
-        html: `
-          <p style="font-family:sans-serif;font-size:15px;">Nieuwe aanmelding via thuismeester.nl:</p>
-          <table style="font-family:sans-serif;font-size:14px;border-collapse:collapse;">
-            <tr><td style="padding:4px 16px 4px 0;color:#6b7266;">Naam</td><td><strong>${record.naam}</strong></td></tr>
-            <tr><td style="padding:4px 16px 4px 0;color:#6b7266;">E-mail</td><td>${record.email}</td></tr>
-            <tr><td style="padding:4px 16px 4px 0;color:#6b7266;">Telefoon</td><td>${record.telefoon ?? "—"}</td></tr>
-            <tr><td style="padding:4px 16px 4px 0;color:#6b7266;">Postcode</td><td>${record.postcode}</td></tr>
-            <tr><td style="padding:4px 16px 4px 0;color:#6b7266;">Woonplaats</td><td>${record.woonplaats}</td></tr>
-            ${record.opmerkingen ? `<tr><td style="padding:4px 16px 4px 0;color:#6b7266;">Opmerkingen</td><td>${record.opmerkingen}</td></tr>` : ""}
-          </table>
-        `,
-      });
-
-      // Bevestigingsmail naar aanmelder
-      await resend.emails.send({
-        from,
-        to: record.email,
-        subject: "Bedankt voor je aanmelding bij Thuismeester",
-        html: `
-          <div style="font-family:sans-serif;max-width:560px;color:#1a1a1a;">
-            <p style="font-size:16px;font-weight:600;margin-bottom:8px;">Bedankt voor je aanmelding, ${record.naam}!</p>
-            <p style="font-size:14px;line-height:1.7;color:#555;">
-              We hebben je aanmelding voor Thuismeester in <strong>${record.woonplaats}</strong> goed ontvangen.
-              Zodra we van start gaan in jouw regio, nemen we contact met je op via dit e-mailadres.
-            </p>
-            <p style="font-size:14px;line-height:1.7;color:#555;">
-              Thuismeester start in januari 2027, bij voldoende aanmeldingen in Amersfoort en omstreken.
-              Je aanmelding is volledig vrijblijvend — er zijn geen kosten verbonden aan de inschrijving.
-            </p>
-            <p style="font-size:14px;color:#555;margin-top:24px;">
-              Met vriendelijke groet,<br/>
-              <strong>Thuismeester</strong><br/>
-              <span style="color:#888;font-size:13px;">Amersfoort en omstreken</span>
-            </p>
-          </div>
-        `,
-      });
-    } else {
-      console.warn("[Thuismeester] RESEND_API_KEY of DIGEST_TO_EMAIL niet ingesteld — e-mails overgeslagen.");
+    if (error) {
+      console.error("[Thuismeester] Supabase fout:", error.message);
+      return NextResponse.json(
+        { message: "Er is een fout opgetreden. Probeer het later opnieuw." },
+        { status: 500 }
+      );
     }
 
-    console.log("[Thuismeester] Aanmelding:", record.naam, record.woonplaats);
+    console.log("[Thuismeester] Aanmelding opgeslagen:", result.data.naam, result.data.woonplaats);
     return NextResponse.json({ message: "Aanmelding ontvangen." }, { status: 200 });
   } catch (err) {
     console.error("[Thuismeester] Fout:", err);
-    return NextResponse.json({ message: "Er is een fout opgetreden. Probeer het later opnieuw." }, { status: 500 });
+    return NextResponse.json(
+      { message: "Er is een fout opgetreden. Probeer het later opnieuw." },
+      { status: 500 }
+    );
   }
 }
 
