@@ -1,10 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createClient } from "@supabase/supabase-js";
 
-const supabase = createClient(
-  process.env.SUPABASE_URL!,
-  process.env.SUPABASE_ANON_KEY!
-);
 
 interface AanmeldingPayload {
   naam: string;
@@ -49,6 +45,11 @@ export async function POST(req: NextRequest) {
     if (!result.valid) {
       return NextResponse.json({ message: result.message }, { status: 400 });
     }
+
+    const supabase = createClient(
+      process.env.SUPABASE_URL!,
+      process.env.SUPABASE_ANON_KEY!
+    );
 
     const { error } = await supabase
       .from("aanmeldingen")
