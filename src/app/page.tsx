@@ -2,444 +2,601 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import Link from "next/link";
 import Button from "@/components/Button";
+import Section from "@/components/Section";
 import SectionLabel from "@/components/SectionLabel";
+import { JSX } from "react";
+import { REGION_NOTE, REGIONS } from "@/lib/site";
+import founderPic from "@/media/founder-pic.png";
+import kokenInDeKeuken from "@/media/koken-in-de-keuken.jpg";
+import gesprekAanTafel from "@/media/gesprek-aan-tafel.jpg";
+import rustigeWoonstraat from "@/media/rustige-woonstraat.jpg";
+import iconAdvice from "@/media/communication.png";
+import iconOverview from "@/media/clipboard2.png";
+import iconProfessionals from "@/media/trustworthy.png";
+import iconCoordination from "@/media/tools.png";
 
 export const metadata: Metadata = {
-  title: "Thuismeester — Rust in huis voor Amersfoort en omstreken",
+    title: `Thuismeester — Jouw onafhankelijke thuisadviseur voor ${REGION_NOTE}`,
 };
 
-// -------------------------------------------------------
-// Regio's — edit this list to add/remove locations
-// -------------------------------------------------------
-const regio = ["Amersfoort", "Leusden", "Hoevelaken", "Nijkerk", "Soest"];
-
-// -------------------------------------------------------
-// Services listed on homepage — keep broad and professional
-// -------------------------------------------------------
-const diensten = [
-  {
-    icon: "💬",
-    title: "Vast aanspreekpunt",
-    body:
-      "Één vertrouwde persoon die meedenkt bij praktische vragen rondom je woning.",
-  },
-  {
-    icon: "🔧",
-    title: "Onderhoud & organisatie",
-    body:
-      "Hulp bij onderhoud, kleine organisatievragen en zaken die aandacht vragen.",
-  },
-  {
-    icon: "🤝",
-    title: "Betrouwbare vakmensen",
-    body:
-      "Doorverwijzing naar goed gescreende vakmensen en begeleiding bij het traject.",
-  },
-  {
-    icon: "📋",
-    title: "Coördinatie",
-    body:
-      "Coordinatie bij terugkerende of losse woningzaken, zodat jij er niet aan hoeft te denken.",
-  },
+const examples = [
+    {
+        question:
+            "Twijfel je over een offerte voor bijvoorbeeld een nieuwe dakgoot?",
+        answer:
+            "Dan kijk ik met je mee naar wat er wordt voorgesteld, welke " +
+            "onderdelen logisch zijn en welke vragen je nog zou kunnen " +
+            "stellen voordat je akkoord geeft.",
+    },
+    {
+        question:
+            "Blijft een lekkage terugkomen ondanks eerdere reparaties?",
+        answer:
+            "Dan help ik je een geschikte vakman te vinden en kan ik, als " +
+            "je dat wilt, betrokken blijven totdat het duidelijk is dat het " +
+            "probleem daadwerkelijk is opgelost.",
+    },
+    {
+        question:
+            "Geen idee welk onderhoud er de komende jaren aan je woning aankomt?",
+        answer:
+            "Dan brengen we samen in kaart wat belangrijk is, wat kan " +
+            "wachten en waar je alvast rekening mee kunt houden.",
+    },
 ];
 
-// -------------------------------------------------------
-// How-it-works steps
-// -------------------------------------------------------
-const steps = [
-  {
-    number: "01",
-    title: "Schrijf je in",
-    body:
-      "Meld je vrijblijvend aan via het aanmeldformulier. Geen verplichtingen, geen kosten.",
-  },
-  {
-    number: "02",
-    title: "We starten bij voldoende aanmeldingen",
-    body:
-      "Zodra er genoeg bewoners in de regio geregistreerd zijn, gaan we officieel van start in januari 2027.",
-  },
-  {
-    number: "03",
-    title: "Jouw Thuismeester helpt je verder",
-    body:
-      "Je wordt gekoppeld aan een vast aanspreekpunt dat jou en jouw woning echt leert kennen.",
-  },
+const services = [
+    {
+        icon: iconAdvice,
+        title: "Onafhankelijk advies",
+        body:
+            "Twijfel over een offerte, klus of onderhoudsvraag? Ik denk " +
+            "met je mee vanuit jouw belang, niet dat van een aannemer.",
+    },
+    {
+        icon: iconCoordination,
+        title: "Onderhoud & overzicht",
+        body:
+            "Ik help je overzicht te houden over wat er aan je woning " +
+            "moet gebeuren en wanneer, zodat onderhoud minder snel als " +
+            "verrassing komt.",
+    },
+    {
+        icon: iconProfessionals,
+        title: "Betrouwbare vakmensen",
+        body:
+            "Is er een vakman nodig? Dan help ik je iemand te vinden uit " +
+            "een zorgvuldig geselecteerd netwerk van vakmensen met wie ik " +
+            "goede ervaringen heb.",
+    },
+    {
+        icon: iconOverview,
+        title: "Coördinatie & opvolging",
+        body:
+            "Wil je dat ik meer uit handen neem? Dan kan ik ook helpen " +
+            "met afspraken, coördinatie en opvolging totdat de klus is " +
+            "afgerond.",
+    },
 ];
 
-export default function HomePage() {
-  return (
-    <>
-      {/* =====================================================
-          HERO SECTION
-          Image: /images/hero-home.jpg
-          Replace placeholder URL with a premium photo of a
-          beautiful, well-kept Dutch home exterior or calm
-          interior — horizontal format, high resolution.
-          ===================================================== */}
-      <section className="relative flex min-h-[90vh] items-end bg-green">
-        {/* Background photo */}
-    <Image
-  src="/images/jaren-30-woning.jpg"
-  alt="Een nette Nederlandse gezinswoning in Amersfoort en omstreken"
-  fill
-  priority
-  className="object-cover object-[center_30%]"
-  sizes="100vw"
-/>    
- 
-
-        {/* Gradient overlay — darkens bottom for text legibility */}
-        <div className="absolute inset-0 bg-gradient-to-t from-green/90 via-green/40 to-transparent" />
-
-        {/* Hero content */}
-        <div className="section-wrapper relative z-10 pb-20 pt-32">
-          <div className="max-w-2xl">
-            <span className="badge mb-6 border border-white/30 bg-white/10 text-white">
-              Amersfoort en omstreken · Start januari 2027
-            </span>
-            <h1 className="font-serif text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
-              Rust in huis.<br />
-              <span className="italic">Regel het met jouw Thuismeester.</span>
-            </h1>
-            <p className="mt-6 max-w-xl text-base leading-relaxed text-white/80 sm:text-lg">
-              Voor bewoners in Amersfoort en omstreken. Voor €10 per maand heb
-              je een vast aanspreekpunt voor praktische hulp en organisatie
-              rondom je woning.
-            </p>
-            <div className="mt-8 flex flex-wrap gap-4">
-              <Button href="/aanmelden" size="lg">
-                Schrijf je in
-              </Button>
-              <Button href="/hoe-werkt-het" variant="outline" size="lg"
-                className="border-white/60 text-white hover:bg-white hover:text-green">
-                Hoe werkt het?
-              </Button>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================
-          LOCAL REGION SECTION
-          ===================================================== */}
-      <section className="bg-beige py-section">
-        <div className="section-wrapper">
-          <div className="mx-auto max-w-3xl text-center">
-            <SectionLabel>Lokaal</SectionLabel>
-            <h2 className="font-serif text-display-lg font-semibold text-ink">
-              Voor Amersfoort en omstreken
-            </h2>
-            <p className="mx-auto mt-6 max-w-prose text-base leading-relaxed text-ink-muted">
-              Thuismeester richt zich in de eerste fase op Amersfoort en
-              omliggende plaatsen. We bouwen eerst lokaal op, zodat we bewoners
-              persoonlijk en betrouwbaar kunnen helpen.
-            </p>
-
-            {/* Region pills */}
-            <ul className="mt-8 flex flex-wrap justify-center gap-3">
-              {regio.map((plaats) => (
-                <li key={plaats}>
-                  <span className="inline-block rounded-full border border-green/30 bg-beige-light
-                                   px-5 py-2 font-serif text-sm font-medium text-ink">
-                    {plaats}
-                  </span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================
-          PROBLEM SECTION
-          Image: /images/homeowner-busy.jpg
-          Replace placeholder with image of a homeowner
-          looking at a to-do list, phone, or household task.
-          ===================================================== */}
-      <section className="bg-beige-light py-section">
-        <div className="section-wrapper">
-          <div className="grid items-center gap-16 lg:grid-cols-2">
-            {/* Text */}
-            <div>
-              <SectionLabel>De uitdaging</SectionLabel>
-              <h2 className="font-serif text-display-md font-semibold text-ink">
-                Alles rondom huis kost tijd en aandacht
-              </h2>
-              <p className="mt-6 max-w-prose text-base leading-relaxed text-ink-muted">
-                Van onderhoud en kleine regelzaken tot het vinden van de juiste
-                vakmensen: veel huiseigenaren missen tijd, overzicht of een
-                betrouwbaar aanspreekpunt. De kleinste zaken blijven liggen,
-                terwijl grotere vraagstukken meer aandacht verdienen.
-              </p>
-              <ul className="mt-8 space-y-4">
-                {[
-                  "Drukke agenda — weinig tijd voor woningzaken",
-                  "Geen betrouwbaar netwerk van vakmensen",
-                  "Verlies van overzicht bij meerdere klussen",
-                  "Onduidelijkheid over wat nodig is en wanneer",
-                ].map((item) => (
-                  <li key={item} className="flex items-start gap-3 text-sm text-ink-soft">
-                    <span className="mt-0.5 h-5 w-5 shrink-0 rounded-full bg-beige-dark
-                                     flex items-center justify-center text-green text-xs">
-                      ✓
-                    </span>
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Image block */}
-            <div className="relative aspect-[4/3] overflow-hidden rounded-sm shadow-sm lg:aspect-square">
-              <Image
-                src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=900&q=80"
-                alt="Drukke huiseigenaar met weinig tijd voor woningbeheer"
-                fill
-                className="object-cover object-center"
-                sizes="(min-width: 1024px) 50vw, 100vw"
-              />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================
-          SOLUTION SECTION
-          Image: /images/service-homeowner.jpg
-          Replace with a warm photo of a Thuismeester in
-          conversation with a homeowner, or someone helping
-          with a household task — professional and personal.
-          ===================================================== */}
-      <section className="bg-green py-section text-white">
-        <div className="section-wrapper">
-          <div className="grid items-center gap-16 lg:grid-cols-2">
-            {/* Image block — left on desktop */}
-            <div className="relative aspect-[4/3] overflow-hidden rounded-sm shadow-lg order-last lg:order-first">
-              <Image
-                src="https://images.unsplash.com/photo-1600880292203-757bb62b4baf?w=900&q=80"
-                alt="Thuismeester in gesprek met een bewoner — betrouwbaar en persoonlijk"
-                fill
-                className="object-cover object-center"
-                sizes="(min-width: 1024px) 50vw, 100vw"
-              />
-            </div>
-
-            {/* Text */}
-            <div>
-              <SectionLabel>
-                <span className="text-white/60">De oplossing</span>
-              </SectionLabel>
-              <h2 className="font-serif text-display-md font-semibold text-white">
-                De Thuismeester helpt
-              </h2>
-              <p className="mt-6 max-w-prose text-base leading-relaxed text-white/75">
-                Met Thuismeester krijg je toegang tot een vast aanspreekpunt
-                dat met je meedenkt en helpt bij praktische zaken in en rondom
-                je huis. Niet als onderhoudsdienst, maar als een betrouwbare
-                organisator die jou en jouw woning echt kent.
-              </p>
-              <div className="mt-8">
-                <Button href="/diensten" variant="outline"
-                  className="border-white/60 text-white hover:bg-white hover:text-green">
-                  Bekijk de diensten
-                </Button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================
-          HOW IT WORKS SECTION
-          ===================================================== */}
-      <section className="bg-beige py-section" id="hoe-werkt-het">
-        <div className="section-wrapper">
-          <div className="mx-auto max-w-3xl text-center">
-            <SectionLabel>Werkwijze</SectionLabel>
-            <h2 className="font-serif text-display-lg font-semibold text-ink">
-              Hoe werkt het?
-            </h2>
-          </div>
-
-          <div className="mt-16 grid gap-8 sm:grid-cols-3">
-            {steps.map((step) => (
-              <div key={step.number} className="relative pl-0 text-left">
-                <p className="font-serif text-5xl font-semibold text-green/20 leading-none">
-                  {step.number}
+/**
+ * Main section the main page.
+ */
+function TopSection(): JSX.Element {
+    return (
+        <div className="section-wrapper pb-20 pt-32">
+            <div className="max-w-2xl">
+                <span className="badge mb-6 border border-white/25 bg-green/90 text-white">
+                    {REGION_NOTE} · Start januari 2027
+                </span>
+                <h1 className="font-serif text-4xl font-semibold leading-tight text-white sm:text-5xl lg:text-6xl">
+                    Een onafhankelijk advies<br />
+                    <span className="italic">vóórdat je tekent.</span>
+                </h1>
+                <p className="mt-6 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">
+                    Twijfel je over een offerte, een klus of welk onderhoud nodig
+                    is? Jouw Thuismeester denkt met je mee — niet als verkoper,
+                    maar als vertrouwd aanspreekpunt dat alleen jouw belang dient.
+                    Voor bewoners in {REGION_NOTE}, vanaf €10 per maand.
                 </p>
-                <h3 className="mt-4 font-serif text-xl font-semibold text-ink">
-                  {step.title}
-                </h3>
-                <p className="mt-3 text-sm leading-relaxed text-ink-muted">
-                  {step.body}
-                </p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-12 text-center">
-            <Button href="/hoe-werkt-het" variant="outline">
-              Meer over de werkwijze
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================
-          SERVICES GRID
-          ===================================================== */}
-      <section className="bg-beige-light py-section">
-        <div className="section-wrapper">
-          <div className="mx-auto max-w-3xl text-center">
-            <SectionLabel>Diensten</SectionLabel>
-            <h2 className="font-serif text-display-lg font-semibold text-ink">
-              Wat doet de Thuismeester?
-            </h2>
-            <p className="mx-auto mt-4 max-w-prose text-base text-ink-muted">
-              Thuismeester neemt praktische zaken rondom je woning uit handen —
-              zodat jij je op de dingen kunt richten die er echt toe doen.
-            </p>
-          </div>
-
-          <div className="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-            {diensten.map((d) => (
-              <div
-                key={d.title}
-                className="flex flex-col gap-4 border border-beige-dark bg-white p-8
-                           transition-shadow hover:shadow-sm"
-              >
-                <span className="text-2xl" aria-hidden="true">{d.icon}</span>
-                <h3 className="font-serif text-lg font-semibold text-ink">
-                  {d.title}
-                </h3>
-                <p className="text-sm leading-relaxed text-ink-muted">{d.body}</p>
-              </div>
-            ))}
-          </div>
-
-          <div className="mt-10 text-center">
-            <Button href="/diensten" variant="outline">
-              Alle diensten bekijken
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================
-          PRICING SECTION
-          ===================================================== */}
-      <section className="bg-beige py-section">
-        <div className="section-wrapper">
-          <div className="mx-auto max-w-4xl">
-            <div className="grid items-center gap-12 lg:grid-cols-2">
-              <div>
-                <SectionLabel>Tarief</SectionLabel>
-                <h2 className="font-serif text-display-md font-semibold text-ink">
-                  Heldere basis
-                </h2>
-                <p className="mt-6 text-base leading-relaxed text-ink-muted">
-                  Voor €10 per maand krijg je toegang tot Thuismeester. Extra
-                  hulp en werkzaamheden worden uitgevoerd tegen uurtarief of op
-                  offertebasis, afhankelijk van de vraag.
-                </p>
-                <p className="mt-4 text-sm text-ink-muted">
-                  Geen verborgen kosten. Geen lange contracten. Transparant en
-                  eerlijk.
-                </p>
-              </div>
-
-              {/* Pricing card */}
-              <div className="border border-beige-dark bg-white p-10">
-                <p className="text-xs font-semibold uppercase tracking-widest text-ink-muted">
-                  Maandelijks abonnement
-                </p>
-                <p className="mt-4 font-serif text-5xl font-semibold text-green">
-                  €10
-                  <span className="ml-2 text-lg font-normal text-ink-muted">/ maand</span>
-                </p>
-                <ul className="mt-8 space-y-3">
-                  {[
-                    "Vast aanspreekpunt",
-                    "Persoonlijk meedenken",
-                    "Toegang tot netwerk van vakmensen",
-                    "Extra hulp op uurtarief of offertebasis",
-                  ].map((item) => (
-                    <li key={item} className="flex items-center gap-3 text-sm text-ink-soft">
-                      <span className="text-green">✓</span>
-                      {item}
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-8">
-                  <Button href="/aanmelden" className="w-full justify-center">
-                    Schrijf je in
-                  </Button>
+                <div className="mt-8 flex flex-wrap gap-4">
+                    <Button href="/aanmelden" variant="light" size="lg">
+                        Meld je aan voor jouw regio
+                    </Button>
+                    <Button href="/hoe-werkt-het" variant="outline-light" size="lg">
+                        Hoe werkt het?
+                    </Button>
                 </div>
-              </div>
             </div>
-          </div>
         </div>
-      </section>
+    );
+}
 
-      {/* =====================================================
-          PRE-LAUNCH SECTION
-          Image: /images/launch-amersfoort.jpg
-          Replace with a subtle regional image — cityscape of
-          Amersfoort, a recognisable street, or a calm
-          neighbourhood scene.
-          ===================================================== */}
-      <section className="relative py-section">
-        <Image
-          src="https://images.unsplash.com/photo-1449844908441-8829872d2607?w=1800&q=80"
-          alt="Rustige woonstraat in Amersfoort en omstreken"
-          fill
-          className="object-cover object-center"
-          sizes="100vw"
-        />
-        <div className="absolute inset-0 bg-green/85" />
-
-        <div className="section-wrapper relative z-10">
-          <div className="mx-auto max-w-2xl text-center text-white">
-            <SectionLabel>
-              <span className="text-white/60">Pre-launch</span>
-            </SectionLabel>
-            <h2 className="font-serif text-display-lg font-semibold">
-              We starten in januari 2027
-            </h2>
-            <p className="mx-auto mt-6 max-w-prose text-base leading-relaxed text-white/75">
-              De dienstverlening gaat van start zodra er voldoende aanmeldingen
-              zijn in Amersfoort en omstreken. Met je inschrijving laat je
-              weten dat er in jouw regio behoefte is aan Thuismeester.
-            </p>
-          </div>
-        </div>
-      </section>
-
-      {/* =====================================================
-          FINAL CTA SECTION
-          ===================================================== */}
-      <section className="bg-beige-light py-section">
+/**
+ * Section describing the regions where thuismeester might be set up.
+ */
+function RegionsSection(): JSX.Element {
+    return (<>
         <div className="section-wrapper">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="font-serif text-display-lg font-semibold text-ink">
-              Interesse?
-            </h2>
-            <p className="mt-5 text-base leading-relaxed text-ink-muted">
-              Schrijf je vrijblijvend in en blijf op de hoogte van de start in
-              jouw regio. Geen verplichtingen, geen kosten bij aanmelding.
-            </p>
-            <div className="mt-8 flex flex-wrap justify-center gap-4">
-              <Button href="/aanmelden" size="lg">
-                Aanmelden
-              </Button>
-              <Button href="/contact" variant="outline" size="lg">
-                Stel een vraag
-              </Button>
+            <div className="mx-auto max-w-3xl text-center">
+                <SectionLabel>Lokaal</SectionLabel>
+                <h2 className="font-serif text-display-lg font-semibold text-ink">
+                    Voor {REGION_NOTE}
+                </h2>
+                <p className="mx-auto mt-6 max-w-prose text-base leading-relaxed text-ink-muted">
+                    Thuismeester start bewust lokaal, in Amersfoort en de
+                    omliggende plaatsen. Zo kunnen we bewoners persoonlijk leren
+                    kennen — en blijven we aanspreekbaar op wat we beloven.
+                </p>
+
+                {/* Region pills */}
+                <ul className="mt-8 flex flex-wrap justify-center gap-3">
+                    {REGIONS.map((plaats) => (
+                        <li key={plaats}>
+                            <span className="inline-block rounded-full border border-green/30 bg-beige-light
+                                   px-5 py-2 font-serif text-sm font-medium text-ink
+                                   transition-colors duration-150 hover:border-green/60">
+                                {plaats}
+                            </span>
+                        </li>
+                    ))}
+                </ul>
             </div>
-          </div>
         </div>
-      </section>
-    </>
-  );
+    </>)
+}
+
+/**
+ * Section describing a series of problems (that thuismeester solves)
+ */
+function ProblemSection(): JSX.Element {
+    return (<>
+        <div className="section-wrapper">
+            <div className="grid items-center gap-16 lg:grid-cols-2">
+                {/* Text */}
+                <div>
+                    <SectionLabel>Het probleem</SectionLabel>
+                    <h2 className="font-serif text-display-md font-semibold text-ink">
+                        Onderhoud en reparaties kosten tijd — en twijfel
+                    </h2>
+                    <p className="mt-6 max-w-prose text-base leading-relaxed text-ink-muted">
+                        De druppende kraan, de dakgoot die vol zit, de schilder die
+                        niet terugbelt, de offerte waarvan je niet weet of die
+                        redelijk is. Niet alleen het regelen kost tijd — vaak weet
+                        je ook niet zeker of een aanpak of prijs wel klopt.
+                    </p>
+                    <ul className="mt-8 space-y-4">
+                        {[
+                            "Geen idee of een offerte reëel is",
+                            "Geen vakman in het adresboek die je vertrouwt",
+                            "Achter afspraken en terugbelverzoeken aan bellen",
+                            "Niet weten welk onderhoud wanneer nodig is",
+                        ].map((item) => (
+                            <li key={item} className="flex items-start gap-3 text-base text-ink-soft">
+                                <span className="mt-0.5 h-5 w-5 shrink-0 rounded-full bg-white
+                                     flex items-center justify-center text-green text-xs">
+                                    ✓
+                                </span>
+                                {item}
+                            </li>
+                        ))}
+                    </ul>
+                </div>
+
+                {/* Image block */}
+                <div className="relative aspect-[4/3] overflow-hidden rounded-sm shadow-sm lg:aspect-square">
+                    <Image
+                        src={kokenInDeKeuken}
+                        alt="Drukke huiseigenaar met weinig tijd voor woningbeheer"
+                        fill
+                        className="object-cover object-center"
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                    />
+                </div>
+            </div>
+        </div>
+    </>);
+}
+
+/**
+ * Section describing solutions from the problems in the problem section.
+ */
+function SolutionsSection(): JSX.Element {
+    return (<>
+        <div className="section-wrapper">
+            <div className="grid items-center gap-16 lg:grid-cols-2">
+                {/* Image block — left on desktop */}
+                <div className="relative aspect-[4/3] overflow-hidden rounded-sm shadow-lg order-last lg:order-first">
+                    <Image
+                        src={gesprekAanTafel}
+                        alt="Thuismeester in gesprek met een bewoner — betrouwbaar en persoonlijk"
+                        fill
+                        className="object-cover object-center"
+                        sizes="(min-width: 1024px) 50vw, 100vw"
+                    />
+                </div>
+
+                {/* Text */}
+                <div>
+                    <SectionLabel>
+                        <span className="text-white/80">De oplossing</span>
+                    </SectionLabel>
+                    <h2 className="font-serif text-display-md font-semibold text-white">
+                        Eén onafhankelijk aanspreekpunt, aan jouw kant
+                    </h2>
+                    <p className="mt-6 max-w-prose text-base leading-relaxed text-white/85">
+                        Thuismeester is geen klusbedrijf en geen verkoper van
+                        vakmensen. Je krijgt één vaste persoon die jouw woning kent,
+                        meedenkt over de beste aanpak, een eerlijke tweede mening
+                        geeft over offertes, en — als je dat wilt — de juiste vakman
+                        regelt en de klus bewaakt. Altijd vanuit jouw belang, nooit
+                        vanuit dat van een aannemer.
+                    </p>
+                    <div className="mt-8">
+                        <Button href="/diensten" variant="outline-light">
+                            Bekijk wat we voor je doen
+                        </Button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </>);
+}
+
+/**
+ * Section explaining how Thuismeester differs from vakmensen and
+ * vergelijkingssites: someone on the resident's side, without commission.
+ */
+function OnYourSideSection(): JSX.Element {
+    return (<>
+        <div className="section-wrapper">
+            <div className="mx-auto max-w-3xl text-center">
+                <SectionLabel>Onafhankelijk</SectionLabel>
+                <h2 className="font-serif text-display-lg font-semibold text-ink">
+                    Iemand aan jouw kant bij alles wat er aan je huis moet
+                    gebeuren
+                </h2>
+                <div className="mt-6 space-y-5">
+                    <p className="mx-auto max-w-prose text-base leading-relaxed text-ink-muted">
+                        Een vakman kijkt naar zijn klus. Een vergelijkingssite
+                        verdient aan het doorsturen van aanvragen. Thuismeester
+                        werkt anders.
+                    </p>
+                    <p className="mx-auto max-w-prose text-base leading-relaxed text-ink-muted">
+                        Ik sta aan jouw kant. Ik help je beoordelen wat nodig is,
+                        denk mee over offertes en onderhoud en help je, als dat
+                        nodig is, een goede vakman te vinden.
+                    </p>
+                    <p className="mx-auto max-w-prose text-base leading-relaxed text-ink-muted">
+                        Geen commissie op een klus en geen belang bij welke vakman
+                        je kiest. Gewoon onafhankelijk advies vanuit jouw belang.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </>);
+}
+
+/**
+ * Section with a short personal introduction of the founder, linking to the
+ * full story on the about page.
+ */
+function FounderSection(): JSX.Element {
+    return (<>
+        <div className="section-wrapper">
+            <div className="grid items-center gap-16 lg:grid-cols-[320px_1fr]">
+                {/* Portrait of the founder */}
+                <div className="relative mx-auto aspect-[3/4] w-full max-w-xs overflow-hidden shadow-sm">
+                    <Image
+                        src={founderPic}
+                        alt="David, oprichter van Thuismeester"
+                        fill
+                        className="object-cover object-center"
+                        sizes="(min-width: 1024px) 320px, 100vw"
+                    />
+                </div>
+
+                <div>
+                    <SectionLabel>Vertrouwen</SectionLabel>
+                    <h2 className="font-serif text-display-md font-semibold text-ink">
+                        Aangenaam, David
+                    </h2>
+                    <p className="mt-6 max-w-prose text-base leading-relaxed text-ink-muted">
+                        Ik ben David en woon en werk zelf in de regio Amersfoort.
+                        De afgelopen jaren zag ik in mijn eigen omgeving hoe vaak
+                        mensen vastlopen op iets wat eigenlijk heel gewoon zou
+                        moeten zijn: goed voor hun huis zorgen. …
+                    </p>
+                    <p className="mt-6">
+                        <Link href="/over-thuismeester"
+                            className="font-medium text-green underline underline-offset-2 hover:text-green-light">
+                            Lees het hele verhaal
+                        </Link>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </>);
+}
+
+/**
+ * Section with three concrete examples of how Thuismeester helps in
+ * practice.
+ */
+function ExamplesSection(): JSX.Element {
+    return (<>
+        <div className="section-wrapper">
+            <div className="mx-auto max-w-3xl text-center">
+                <SectionLabel>In de praktijk</SectionLabel>
+                <h2 className="font-serif text-display-lg font-semibold text-ink">
+                    Zo zou Thuismeester je kunnen helpen
+                </h2>
+                <p className="mx-auto mt-6 max-w-prose text-base leading-relaxed text-ink-muted">
+                    Een paar voorbeelden van situaties waarin het prettig is als
+                    er iemand aan jouw kant staat.
+                </p>
+            </div>
+
+            <div className="mx-auto mt-14 grid max-w-5xl gap-10 lg:grid-cols-3">
+                {/* Each example card has a purple left border as accent line */}
+                {examples.map((example, i) => (
+                    <div key={example.question} className="border-l-2 border-purple pl-5">
+                        <p className="text-xs font-semibold uppercase tracking-widest text-ink-muted">
+                            Voorbeeld {i + 1}
+                        </p>
+                        <h3 className="mt-3 font-serif text-xl font-semibold text-ink">
+                            {example.question}
+                        </h3>
+                        <p className="mt-3 text-base leading-relaxed text-ink-muted">
+                            {example.answer}
+                        </p>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </>);
+}
+
+/**
+ * Section summarising the four services with their icons, with a link to
+ * the services page.
+ */
+function ServicesSummarySection(): JSX.Element {
+    return (<>
+        <div className="section-wrapper">
+            <div className="mx-auto max-w-3xl text-center">
+                <SectionLabel>Diensten</SectionLabel>
+                <h2 className="font-serif text-display-lg font-semibold text-ink">
+                    Wat Thuismeester voor je doet
+                </h2>
+                <p className="mx-auto mt-6 max-w-prose text-base leading-relaxed text-ink-muted">
+                    Thuismeester is geen klusbedrijf en geen verkoper van
+                    vakmensen. Je krijgt één vast aanspreekpunt dat vanuit jouw
+                    belang met je meedenkt.
+                </p>
+            </div>
+
+            <div className="mx-auto mt-14 grid max-w-4xl gap-x-12 gap-y-10 sm:grid-cols-2">
+                {services.map((service) => (
+                    <div key={service.title} className="flex items-start gap-5">
+                        <Image
+                            src={service.icon}
+                            alt=""
+                            aria-hidden="true"
+                            className="h-12 w-12 shrink-0"
+                        />
+                        <div>
+                            <h3 className="font-serif text-xl font-semibold text-ink">
+                                {service.title}
+                            </h3>
+                            <p className="mt-2 text-base leading-relaxed text-ink-muted">
+                                {service.body}
+                            </p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+
+            <div className="mt-12 text-center">
+                <Button href="/diensten" variant="outline">
+                    Alle diensten bekijken
+                </Button>
+            </div>
+        </div>
+    </>);
+}
+
+/**
+ * Section covering pricing of the subscription.
+ */
+function PricingInfoSection(): JSX.Element {
+    return (<>
+        <div className="section-wrapper">
+            <div className="mx-auto max-w-4xl">
+                <div className="grid items-start gap-12 lg:grid-cols-2">
+                    <div>
+                        <SectionLabel>
+                            <span className="text-white/80">Prijs</span>
+                        </SectionLabel>
+                        <h2 className="font-serif text-display-md font-semibold text-white">
+                            Een Thuismeester voor een vast bedrag per maand
+                        </h2>
+                        <p className="mt-6 text-base leading-relaxed text-white/85">
+                            Voor een vast bedrag per maand heb je een onafhankelijk
+                            aanspreekpunt voor vragen over onderhoud, offertes en
+                            werkzaamheden aan je woning.
+                        </p>
+                        <p className="mt-8 font-semibold text-white">
+                            Bij je abonnement:
+                        </p>
+                        <ul className="mt-4 space-y-3">
+                            {[
+                                "een vast aanspreekpunt voor je woning;",
+                                "onafhankelijk meedenken bij onderhoudsvragen;",
+                                "een eerste blik op offertes en voorstellen van vakmensen;",
+                                "hulp bij het plannen van toekomstig onderhoud;",
+                                "toegang tot ons zorgvuldig geselecteerde netwerk van vakmensen.",
+                            ].map((item) => (
+                                <li key={item} className="flex items-start gap-3 text-base text-white/85">
+                                    <span className="mt-0.5 h-5 w-5 shrink-0 rounded-full bg-white
+                                         flex items-center justify-center text-green text-xs">
+                                        ✓
+                                    </span>
+                                    {item}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+
+                    <div>
+                        {/* Pricing card — carries the wide purple left-edge accent so the
+                      price block is the clear focal point of this section */}
+                        <div className="border border-beige-dark bg-white p-10 shadow-accent-l-lg">
+                            <p className="text-xs font-semibold uppercase tracking-widest text-ink-muted">
+                                Maandelijks abonnement
+                            </p>
+                            <p className="mt-4 font-serif text-5xl font-semibold text-green">
+                                €10
+                                <span className="ml-2 text-lg font-normal text-ink-muted">/ maand</span>
+                            </p>
+                            <p className="mt-6 text-base text-ink-soft">
+                                Geen verborgen kosten, maandelijks opzegbaar.
+                            </p>
+                        </div>
+
+                        <h3 className="mt-10 font-serif text-xl font-semibold text-white">
+                            Meer uit handen geven?
+                        </h3>
+                        <p className="mt-3 text-base leading-relaxed text-white/85">
+                            Soms vraagt een klus meer tijd. Bijvoorbeeld als je wilt
+                            dat ik meerdere offertes vergelijk, een vakman voor je
+                            zoek, bij je thuis langskom of de uitvoering en
+                            opvolging begeleid.
+                        </p>
+                        <p className="mt-3 text-base leading-relaxed text-white/85">
+                            Dat kan natuurlijk ook. We spreken vooraf af wat ik voor
+                            je doe en wat dat kost, zodat je nooit achteraf voor
+                            verrassingen komt te staan.
+                        </p>
+                        <div className="mt-8">
+                            <Button href="/aanmelden" variant="light">
+                                Meld je aan voor jouw regio
+                            </Button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </>);
+}
+
+/**
+ * Final section — when the service starts, with the closing CTA's.
+ */
+function FinalSection(): JSX.Element {
+    return (<>
+        <div className="section-wrapper">
+            <div className="mx-auto max-w-2xl text-center">
+                <SectionLabel>Afsluiting</SectionLabel>
+                <h2 className="font-serif text-display-lg font-semibold text-ink">
+                    We starten in januari 2027
+                </h2>
+                <p className="mx-auto mt-6 max-w-prose text-base leading-relaxed text-ink-muted">
+                    Zodra er voldoende aanmeldingen zijn in {REGION_NOTE}, gaan we
+                    van start. Meld je vrijblijvend aan en blijf op de hoogte.
+                </p>
+                <h3 className="mt-10 font-serif text-xl font-semibold text-ink">
+                    En daarna?
+                </h3>
+                <p className="mx-auto mt-3 max-w-prose text-base leading-relaxed text-ink-muted">
+                    We beginnen bewust lokaal. Zodra Thuismeester in Amersfoort en
+                    omgeving goed loopt, willen we ook in omliggende plaatsen
+                    vaste Thuismeesters inzetten. Zo blijft het concept hetzelfde:
+                    een persoonlijk en onafhankelijk aanspreekpunt dichtbij, in
+                    plaats van een callcenter op afstand.
+                </p>
+                <div className="mt-8 flex flex-wrap justify-center gap-4">
+                    <Button href="/aanmelden" size="lg">
+                        Meld je aan voor jouw regio
+                    </Button>
+                    <Button href="/contact" variant="outline" size="lg">
+                        Stel een vraag
+                    </Button>
+                </div>
+            </div>
+        </div>
+    </>);
+}
+
+/**
+ * @returns the main page
+ */
+export default function HomePage(): JSX.Element {
+    return (
+        <>
+            {/* Backgrounds alternate between the warm beiges, cool mint and
+                dark green so no two adjacent sections (incl. the green
+                footer) look alike; every section gets its own scene. */}
+            <Section
+                background="green"
+                padding=""
+                className="flex min-h-[90vh] items-end"
+                backdrop={<>
+                    <Image
+                        src="/images/jaren-30-woning.jpg"
+                        alt="Een nette Nederlandse gezinswoning in Amersfoort en omstreken"
+                        fill
+                        priority
+                        className="object-cover object-[center_30%]"
+                        sizes="100vw"
+                    />
+                    {/* Gradient overlay — darkens bottom for text legibility */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-green/90 via-green/40 to-transparent" />
+                </>}
+            >
+                <TopSection />
+            </Section>
+            <Section background="beige" scene="gable" sceneWidth="w-96">
+                <RegionsSection />
+            </Section>
+            <Section background="mint" scene="play" sceneWidth="w-80">
+                <ProblemSection />
+            </Section>
+            <Section background="green" scene="row" sceneWidth="w-[36rem]">
+                <SolutionsSection />
+            </Section>
+            <Section background="mint" scene="stepped" sceneWidth="w-72">
+                <OnYourSideSection />
+            </Section>
+            <Section background="beige-light" scene="court" sceneWidth="w-96">
+                <FounderSection />
+            </Section>
+            <Section background="mint" scene="hof" sceneWidth="w-[26rem]">
+                <ExamplesSection />
+            </Section>
+            <Section background="beige" scene="tall" sceneWidth="w-96">
+                <ServicesSummarySection />
+            </Section>
+            <Section
+                background="green"
+                scene="lane"
+                sceneWidth="w-[32rem]"
+                backdrop={<>
+                    <Image
+                        src={rustigeWoonstraat}
+                        alt="Rustige woonstraat in Amersfoort en omstreken"
+                        fill
+                        className="object-cover object-center"
+                        sizes="100vw"
+                    />
+                    <div className="absolute inset-0 bg-green/85" />
+                </>}
+            >
+                <PricingInfoSection />
+            </Section>
+            <Section background="beige" scene="orchard" sceneWidth="w-96">
+                <FinalSection />
+            </Section>
+        </>
+    );
 }

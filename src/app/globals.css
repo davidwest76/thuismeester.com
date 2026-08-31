@@ -2,75 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
-/* -------------------------------------------------------
-   Google Fonts — Playfair Display (headings) + Inter (body)
-   Import via <link> in layout.tsx for performance.
-   ------------------------------------------------------- */
-
 @layer base {
-  html {
-    scroll-behavior: smooth;
-  }
+    html {
+        scroll-behavior: smooth;
+    }
 
-  body {
-    @apply font-sans text-ink antialiased bg-beige-light;
-  }
+    body {
+        @apply font-sans text-ink antialiased bg-beige-light;
+    }
 
-  h1, h2, h3, h4 {
-    @apply font-serif text-ink;
-    font-feature-settings: "kern" 1, "liga" 1;
-  }
+    h1,
+    h2,
+    h3,
+    h4 {
+        @apply font-serif text-ink;
+        font-feature-settings: "kern" 1, "liga" 1;
+    }
 
-  /* Remove default button & input focus rings; add custom ones */
-  *:focus-visible {
-    @apply outline-2 outline-offset-2 outline-green;
-  }
+    /* Remove default button & input focus rings; add custom ones */
+    *:focus-visible {
+        @apply outline-2 outline-offset-2 outline-green;
+    }
 
-  /* Smooth image rendering */
-  img {
-    @apply select-none;
-  }
+    /* Smooth image rendering */
+    img {
+        @apply select-none;
+    }
 }
 
 @layer components {
-  /* -------------------------------------------------------
-     Reusable section wrapper
-     ------------------------------------------------------- */
-  .section-wrapper {
-    @apply mx-auto max-w-content px-6 lg:px-12;
-  }
 
-  /* -------------------------------------------------------
-     Divider line — thin beige-dark separator
-     ------------------------------------------------------- */
-  .section-divider {
-    @apply border-t border-beige-dark;
-  }
+    .section-wrapper {
+        @apply mx-auto max-w-content px-6 lg:px-12;
+    }
 
-  /* -------------------------------------------------------
-     Form inputs
-     ------------------------------------------------------- */
-  .form-input {
-    @apply w-full rounded-none border border-beige-dark bg-white px-4 py-3 text-ink
-           placeholder-stone transition-colors duration-150
-           focus:border-green focus:outline-none focus:ring-1 focus:ring-green;
-  }
+    .section-divider {
+        @apply border-t border-beige-dark;
+    }
 
-  .form-label {
-    @apply mb-1 block text-sm font-medium text-ink-soft;
-  }
+    .form-input {
+        @apply w-full rounded-none border border-beige-dark bg-white px-4 py-3 text-ink placeholder-stone-dark transition-colors duration-150 focus:border-green focus:outline-none focus:ring-1 focus:ring-green;
+    }
 
-  /* -------------------------------------------------------
-     Tag / pill badge
-     ------------------------------------------------------- */
-  .badge {
-    @apply inline-block rounded-full bg-green/10 px-3 py-1 text-xs font-medium
-           uppercase tracking-widest text-green;
-  }
+    .form-label {
+        @apply mb-1 block text-sm font-medium text-ink-soft;
+    }
+
+    .badge {
+        @apply inline-block rounded-full bg-green/10 px-3 py-1 text-xs font-medium uppercase tracking-widest text-green;
+    }
 }
 
 @layer utilities {
-  .text-balance {
-    text-wrap: balance;
-  }
+    .text-balance {
+        text-wrap: balance;
+    }
+
+    /**
+   * .scrollbar-hidden
+   * Hides the scrollbar of a scroll container without disabling scrolling.
+   * Used by the services carousel on /diensten, where the arrow buttons
+   * (plus touch/trackpad swiping) are the intended way to move through
+   * the cards — a visible scrollbar underneath would just add noise.
+   */
+    .scrollbar-hidden {
+        scrollbar-width: none;
+        /* Firefox */
+        -ms-overflow-style: none;
+        /* old Edge/IE */
+    }
+
+    .scrollbar-hidden::-webkit-scrollbar {
+        display: none;
+        /* Chrome/Safari */
+    }
 }
